@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Absolute
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.data.model.Link
 
@@ -41,22 +43,25 @@ fun LinkBox (
 		*/
         Column (
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(16.dp)
                 .clickable { onSelectLink(link) },
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row (
-
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Absolute.SpaceBetween
             ) { //  icon?] \[link itself]
                 Text("[~~]") // input symbol here
-                Text(link.url)
+                Text(link.url) // TODO: make link clickable
             }
 
             Row (
-                modifier = Modifier,
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Absolute.SpaceBetween
             ) { // [share button] \[copy button]
                 Text("[~x]") // sharesheet button
                 Text("[x~]") // copy button

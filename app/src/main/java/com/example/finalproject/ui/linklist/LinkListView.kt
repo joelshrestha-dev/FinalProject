@@ -18,9 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.data.model.Link
 import com.example.finalproject.ui.LinkBox
+import com.example.finalproject.ui.theme.FinalProjectTheme
 
 @ExperimentalFoundationApi
 @Composable
@@ -108,8 +110,10 @@ fun Landscape (
     onSelectLink: (Link) -> Unit
 ) {
     Row () {
-        Card (
-            modifier = Modifier.weight(1.0f).padding(16.dp),
+        Card ( // TODO: add an onselect popup page to delete the link
+            modifier = Modifier
+                .weight(1.0f)
+                .padding(16.dp),
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -125,5 +129,22 @@ fun Landscape (
             modifier = modifier
         )
 
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Preview
+@Composable
+fun LinkListPreview () {
+    FinalProjectTheme() {
+        val vm = LinkListViewModel()
+        LinkListView(
+            modifier = Modifier,
+            links = vm.links.value,
+            selectedLink = null,
+            waiting = false,
+            onDelete = {},
+            onSelectLink = {}
+        )
     }
 }

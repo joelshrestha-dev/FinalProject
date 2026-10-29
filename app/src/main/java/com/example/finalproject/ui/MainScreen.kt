@@ -25,6 +25,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.finalproject.ui.nav.LinkList
 import com.example.finalproject.ui.nav.NavGraph
+import com.example.finalproject.ui.nav.NewLink
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnusedMaterial3ScaffoldPaddingParameter")
@@ -69,18 +70,19 @@ private fun BottomBar(
         NavigationBarItem(
             selected = currentDestination?.hasRoute(LinkList::class) ?: false,
             onClick = {
-                nav.navigate(LinkList) {
+                nav.navigate(NewLink) {
                     launchSingleTop = true
-                    popUpTo(LinkList)
+                    popUpTo(NewLink)
                 }
             },
             icon = {
-                Icon(painterResource(R.drawable.ic_home), null)
+                Icon(painterResource(R.drawable.ic_add), null)
             },
             label = {
-                Text("SongList")
+                Text("New Link")
             }
         )
+
         NavigationBarItem(
             selected = currentDestination?.hasRoute(LinkList::class) ?: false,
             onClick = {
@@ -89,11 +91,12 @@ private fun BottomBar(
                 }
             },
             icon = {
-                Icon(painterResource(R.drawable.ic_add), null)
+                Icon(painterResource(R.drawable.ic_history), null)
             },
             label = {
-                Text("New Song")
+                Text("Link History")
             }
         )
+
     }
 }
