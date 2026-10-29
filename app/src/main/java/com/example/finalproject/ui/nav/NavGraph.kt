@@ -14,13 +14,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.finalproject.data.model.Link
+import com.example.finalproject.ui.linklist.LinkListView
+import com.example.finalproject.ui.linklist.LinkListViewModel
+import com.example.finalproject.ui.newlink.NewLinkView
 
+@OptIn(ExperimentalComposeUiApi::class)
+@ExperimentalFoundationApi
 @Composable
 fun NavGraph(
     navController: NavHostController =rememberNavController(),
     modifier: Modifier = Modifier
 ) {
-    val viewModel: ViewModel = viewModel()
+    val viewModel: LinkListViewModel = viewModel()
 
     NavHost (
         navController = navController,
@@ -28,7 +34,25 @@ fun NavGraph(
         modifier = modifier
     ) {
         composable<LinkList> {
-            
+            val likList by viewModel.links
+            val selectedLink by viewModel.selectedLink
+            val waiting by viewModel.waiting
+            LinkListView(
+                links = likList,
+                selectedLink = selectedLink,
+                waiting = waiting,
+                onDelete = viewModel::deleteLink,
+                onSelectLink = viewModel::selectLink
+            )
+        }
+
+        composable<NewLink> {
+            NewLinkView(
+                onAddLink = { link: Link ->
+                    viewModel.addLink(link)
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
