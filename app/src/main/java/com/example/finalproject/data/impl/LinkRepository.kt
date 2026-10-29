@@ -18,7 +18,7 @@ class LinkRepository : ILinkRepository {
         return _links
     }
 
-    override suspend fun deleteLink(link: Link) {
+    override suspend fun deleteLink(link: Link) { // TODO: add a list / stack for "undo delete" button
         delay(500.milliseconds)
         _links = _links.filter { s -> s.id != link.id }
     }
