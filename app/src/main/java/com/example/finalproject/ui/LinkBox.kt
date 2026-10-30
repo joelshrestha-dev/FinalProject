@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.basicMarquee
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,6 +27,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.toClipEntry
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.R
 import com.example.finalproject.data.model.Link
@@ -71,8 +74,19 @@ fun LinkBox (
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Absolute.SpaceBetween
             ) { //  icon?] \[link itself]
-                Text("[~~]") // TODO: can import symbols for various preloaded websites
-                Text(link.url)
+                Text(
+                    text = "[~~]",
+                    modifier = Modifier.weight(0.3f)
+                ) // TODO: can import symbols for various preloaded websites
+                Text(
+                    text = link.url,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier
+                        .basicMarquee()
+                        .weight(0.7f)
+
+                )
             }
 
             Row (
