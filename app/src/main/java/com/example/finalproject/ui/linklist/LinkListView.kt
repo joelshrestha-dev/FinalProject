@@ -2,6 +2,7 @@ package com.example.finalproject.ui.linklist
 
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,6 +46,7 @@ fun LinkListView(
         }
 
         val configuration = LocalConfiguration.current
+        val clipboardManager = LocalClipboard.current
 
         if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             Landscape(
@@ -116,7 +119,11 @@ fun Landscape (
                 .padding(16.dp),
         ) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clickable { //copy the link url in the attached box
+
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Text(selectedLink?.url ?: "") // TODO: potentially add embed details

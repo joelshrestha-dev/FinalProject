@@ -68,7 +68,7 @@ private fun BottomBar(
     val currentDestination = backStackEntry?.destination
     NavigationBar() {
         NavigationBarItem(
-            selected = currentDestination?.hasRoute(LinkList::class) ?: false,
+            selected = currentDestination?.hasRoute(NewLink::class) ?: false,
             onClick = {
                 nav.navigate(NewLink) {
                     launchSingleTop = true

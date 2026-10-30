@@ -10,7 +10,7 @@ class LinkRepository : ILinkRepository {
 
     init {
         _links =(0..20).map { i ->
-            Link("Link $i", "https://www.google.com")
+            Link("Link $i", "https://www.google.com/$i")
         }
     }
 
