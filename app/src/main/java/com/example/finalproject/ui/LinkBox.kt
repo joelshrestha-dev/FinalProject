@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -22,8 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.toClipEntry
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
+import com.example.finalproject.R
 import com.example.finalproject.data.model.Link
 import kotlinx.coroutines.launch
 
@@ -60,7 +63,7 @@ fun LinkBox (
                 .fillMaxWidth()
                 .padding(16.dp)
                 .clickable { onSelectLink(link) },
-            verticalArrangement = Arrangement.SpaceEvenly,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row (
@@ -68,12 +71,8 @@ fun LinkBox (
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Absolute.SpaceBetween
             ) { //  icon?] \[link itself]
-                Text("[~~]") // input symbol here
-                Text(
-                    modifier = Modifier.clickable {
-                    }, // TODO: copy to clipboard
-                    text = link.url
-                ) // TODO: make link clickable
+                Text("[~~]") // TODO: can import symbols for various preloaded websites
+                Text(link.url)
             }
 
             Row (
@@ -81,8 +80,10 @@ fun LinkBox (
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Absolute.SpaceBetween
             ) { // [share button] \[copy button]
-                Text( // sharesheet button
-                    text = "[~x]",
+                Icon(
+                    painterResource(
+                        R.drawable.ic_share),
+                    null,
                     modifier = Modifier.clickable {
                         val sendIntent = Intent(Intent.ACTION_SEND).apply {
                             putExtra(Intent.EXTRA_TEXT, link.url)
@@ -92,8 +93,11 @@ fun LinkBox (
                         context.startActivity(shareIntent)
                     }
                 )
-                Text( // copy button
-                    text = "[x~]",
+
+                Icon(
+                    painterResource(
+                        R.drawable.ic_content_copy),
+                    null,
                     modifier = Modifier.clickable {
                         scope.launch {
                             clipboard.setClipEntry((ClipData.newPlainText("label", link.url.toString()).toClipEntry()))
