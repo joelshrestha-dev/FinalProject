@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
@@ -56,7 +57,7 @@ fun NewLinkView (
     }
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().fillMaxHeight()
     ) {
         Text(
             "Clean Link",
@@ -93,7 +94,6 @@ fun NewLinkView (
                 try {
                     val link = vm.validate()
                     // TODO: properly convert a song from tracker to non
-                    // TODO: make it copy to clipboard
                     scope.launch {
                         clipboard.setClipEntry((ClipData.newPlainText("label", link.url.toString()).toClipEntry()))
                     }
