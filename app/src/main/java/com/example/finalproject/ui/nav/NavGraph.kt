@@ -53,7 +53,12 @@ fun NavGraph(
             NewLinkView(
                 onAddLink = { link: Link ->
                     viewModel.addLink(link)
-                    navController.popBackStack()
+                    navController.navigate(LinkList) {
+                        popUpTo(NewLink) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
                 }
             )
         }

@@ -100,15 +100,11 @@ fun ConfirmDeletion(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Text("Are you sure you want to delete this link?") // TODO: make the text wrap a little cleaner
+            Text("Do you want to delete this link?") // TODO: make the text wrap a little cleaner
         },
         text = {
             Text(
                 text = if(selectedLink != null) selectedLink.url else "",
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                modifier = Modifier
-                    .basicMarquee()
             )
         },
         confirmButton = {
@@ -167,7 +163,7 @@ fun Landscape (
     onSelectLink: (Link) -> Unit
 ) {
     Row () {
-        Card ( // TODO: add an onselect popup page to delete the link
+        Card (
             modifier = Modifier
                 .weight(1.0f)
                 .padding(16.dp),

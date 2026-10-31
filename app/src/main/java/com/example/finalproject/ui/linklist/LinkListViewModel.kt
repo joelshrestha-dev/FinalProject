@@ -35,7 +35,6 @@ class LinkListViewModel : ViewModel() {
         waiting = _waiting
         _showDialogue = mutableStateOf(false)
         showDialogue = _showDialogue
-        Log.d("SHOWDIALOGUETRACKER", showDialogue.value.toString())
     }
 
     fun addLink (link: Link) {

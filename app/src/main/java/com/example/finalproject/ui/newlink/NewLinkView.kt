@@ -38,6 +38,7 @@ import com.example.finalproject.data.model.Link
 import com.example.finalproject.ui.theme.FinalProjectTheme
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import java.net.URI
 
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalComposeUiApi
@@ -89,11 +90,17 @@ fun NewLinkView (
             )
         )
 
+        // TODO: ADD POTENTIAL FOR ALTERING ACCEPTABLE LINKS
+
         Button(
             onClick = {
                 try {
                     val link = vm.validate()
-                    // TODO: properly convert a song from tracker to non
+
+                    val uri = URI(link.url)
+
+                    link.url = URI(uri.scheme, uri.host, uri.path, null, null).toString()
+
                     scope.launch {
                         clipboard.setClipEntry((ClipData.newPlainText("label", link.url.toString()).toClipEntry()))
                     }
