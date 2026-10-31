@@ -1,5 +1,6 @@
 package com.example.finalproject.ui.linklist
 
+import android.util.Log
 import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -21,6 +22,8 @@ class LinkListViewModel : ViewModel() {
 
     private val _waiting: MutableState<Boolean>
     val waiting: State<Boolean>
+    private val _showDialogue: MutableState<Boolean>
+    val showDialogue: State<Boolean>
 
     private val _repository: ILinkRepository = LinkRepository()
 
@@ -30,6 +33,9 @@ class LinkListViewModel : ViewModel() {
         selectedLink = _selected
         _waiting = mutableStateOf(false)
         waiting = _waiting
+        _showDialogue = mutableStateOf(false)
+        showDialogue = _showDialogue
+        Log.d("SHOWDIALOGUETRACKER", showDialogue.value.toString())
     }
 
     fun addLink (link: Link) {
@@ -44,6 +50,10 @@ class LinkListViewModel : ViewModel() {
             _links.value = _repository.getLinks()
             _waiting.value = false
         }
+    }
+
+    fun setShowDialogue(show: Boolean) {
+        _showDialogue.value = show
     }
 
     fun selectLink (link: Link) {

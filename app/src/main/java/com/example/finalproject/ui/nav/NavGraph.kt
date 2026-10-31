@@ -37,10 +37,13 @@ fun NavGraph(
             val likList by viewModel.links
             val selectedLink by viewModel.selectedLink
             val waiting by viewModel.waiting
+            val showDialogue by viewModel.showDialogue
             LinkListView(
                 links = likList,
                 selectedLink = selectedLink,
                 waiting = waiting,
+                showDialogue = showDialogue,
+                onSetShowDialogue = viewModel::setShowDialogue,
                 onDelete = viewModel::deleteLink,
                 onSelectLink = viewModel::selectLink
             )

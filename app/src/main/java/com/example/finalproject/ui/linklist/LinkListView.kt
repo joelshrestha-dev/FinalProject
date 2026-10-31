@@ -2,6 +2,7 @@ package com.example.finalproject.ui.linklist
 
 import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -20,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalClipboard
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.data.model.Link
@@ -31,10 +35,12 @@ import com.example.finalproject.ui.theme.FinalProjectTheme
 fun LinkListView(
     modifier: Modifier = Modifier,
     links: List<Link>,
-    selectedLink: Link?,
-    waiting: Boolean,
+    selectedLink: Link? = null,
     onDelete: (Link) -> Unit,
-    onSelectLink: (Link) -> Unit
+    onSelectLink: (Link) -> Unit,
+    waiting: Boolean = false,
+    showDialogue: Boolean = false,
+    onSetShowDialogue: (Boolean) -> Unit = {}
 
 ) {
     Box (
@@ -43,6 +49,7 @@ fun LinkListView(
     ) {
         val handleRowDelete: (Link) -> Unit = { link ->
             onSelectLink(link)
+            onSetShowDialogue(true)
         }
 
         val configuration = LocalConfiguration.current
@@ -53,21 +60,68 @@ fun LinkListView(
                 modifier = Modifier.alpha(if (waiting) 0.2f else 1.0f),
                 links = links,
                 selectedLink = selectedLink,
-                onDelete = onDelete,
+                onDelete = handleRowDelete,
                 onSelectLink = onSelectLink,
             )
         } else {
             Portrait(
                 modifier = Modifier.alpha(if (waiting) 0.2f else 1.0f),
                 links = links,
-                onDelete = onDelete,
+                onDelete = handleRowDelete,
                 onSelectLink = onSelectLink
             )
         }
+
+        if (showDialogue) {
+            ConfirmDeletion(
+                selectedLink = selectedLink,
+                onConfirm = {
+                    selectedLink?.let { onDelete(it) }
+                    onSetShowDialogue(false)
+                },
+                onDismiss = {
+                    onSetShowDialogue(false)
+                }
+            )
+        }
+
         if (waiting) {
             CircularProgressIndicator()
         }
     }
+}
+
+@Composable
+fun ConfirmDeletion(
+    selectedLink: Link?,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Text("Are you sure you want to delete this link?") // TODO: make the text wrap a little cleaner
+        },
+        text = {
+            Text(
+                text = if(selectedLink != null) selectedLink.url else "",
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .basicMarquee()
+            )
+        },
+        confirmButton = {
+            Button(onClick = onConfirm) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
 }
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -121,12 +175,13 @@ fun Landscape (
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .clickable { //copy the link url in the attached box
+                    .clickable {
+
 
                     },
                 contentAlignment = Alignment.Center
             ) {
-                Text(selectedLink?.url ?: "") // TODO: potentially add embed details
+                Text(selectedLink?.url ?: "") // TODO: potentially add embed details -> internet api
             }
         }
         LinkListUI(

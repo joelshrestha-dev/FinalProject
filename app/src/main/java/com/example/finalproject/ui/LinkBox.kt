@@ -65,7 +65,7 @@ fun LinkBox (
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .clickable { onSelectLink(link) },
+                .clickable { onDelete(link) },
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -77,7 +77,7 @@ fun LinkBox (
                 Text(
                     text = "[~~]",
                     modifier = Modifier.weight(0.3f)
-                ) // TODO: can import symbols for various preloaded websites
+                ) // TODO: can import symbols for various preloaded websites -> SQL
                 Text(
                     text = link.url,
                     maxLines = 1,
