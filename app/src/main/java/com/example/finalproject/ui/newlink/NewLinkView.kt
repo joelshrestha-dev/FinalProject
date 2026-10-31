@@ -23,11 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalClipboard
-import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.toClipEntry
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,7 +45,7 @@ fun NewLinkView (
     vm: NewLinkViewModel = viewModel(),
     onAddLink: (Link) -> Unit
 ) {
-    val ctx = LocalContext.current
+    val context = LocalContext.current
     val urlTf: FocusRequester = remember { FocusRequester() }
     val keyboardController = LocalSoftwareKeyboardController.current
     val clipboard = LocalClipboard.current // clipboardManager.setText(AnnotatedString(textToCopy))
@@ -95,18 +93,27 @@ fun NewLinkView (
         Button(
             onClick = {
                 try {
-                    val link = vm.validate()
+                    val link: Link = vm.validate()
 
                     val uri = URI(link.url)
 
                     link.url = URI(uri.scheme, uri.host, uri.path, null, null).toString()
 
                     scope.launch {
-                        clipboard.setClipEntry((ClipData.newPlainText("label", link.url.toString()).toClipEntry()))
+                        clipboard.setClipEntry(
+                            ClipData.newPlainText(
+                                "label",
+                                link.url.toString()
+                            ).toClipEntry()
+                        )
                     }
                     onAddLink(link)
                 } catch(e: Exception) {
-                    Toast.makeText(ctx, e.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText( // TODO: make this toast better
+                        context,
+                        "INVALID URL",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         ) {

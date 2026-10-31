@@ -5,7 +5,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.data.model.Link
-
+import java.net.URI
+import java.net.URL
+import android.widget.Toast
 class NewLinkViewModel : ViewModel() {
     private val _url = mutableStateOf("")
     val url = _url
@@ -15,12 +17,22 @@ class NewLinkViewModel : ViewModel() {
     }
 
     fun validate(): Link {
-        if(url.value.isEmpty()) {
+        if(url.value.isBlank()) {
             throw Exception("URL cannot be empty")
         }
 
         // TODO: validate that it is actually a url, check against precontained list of usable websites stored in a seperate file
 
-        return Link("",url.value)
+        return try {
+            URI(url.value).toURL()
+            Link("",url.value)
+        } catch (e: Exception) {
+            Toast.makeText(
+                null,
+                "Invalid URL",
+                Toast.LENGTH_SHORT
+            ).show()
+            null
+        }!!
     }
 }
