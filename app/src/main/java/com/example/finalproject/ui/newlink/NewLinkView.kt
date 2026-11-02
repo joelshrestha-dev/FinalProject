@@ -109,7 +109,7 @@ fun NewLinkView (
                     }
                     onAddLink(link)
                 } catch(e: Exception) {
-                    Toast.makeText( // TODO: make this toast better
+                    Toast.makeText( // TODO: make this toast better, snackbar would be better
                         context,
                         "INVALID URL",
                         Toast.LENGTH_SHORT

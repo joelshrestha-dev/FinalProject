@@ -155,7 +155,7 @@ fun Portrait (
 }
 
 @Composable
-fun Landscape (
+fun Landscape ( // TODO: MOVE DELETE BUTTON TO THE SIDE CARD IN LANDSCAPE? OR A LANDSCAPE DELETE FUNCTION
     modifier: Modifier = Modifier,
     links: List<Link>,
     selectedLink: Link?,
