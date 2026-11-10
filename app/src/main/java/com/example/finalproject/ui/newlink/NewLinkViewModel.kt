@@ -21,7 +21,7 @@ class NewLinkViewModel : ViewModel() {
             throw Exception("URL cannot be empty")
         }
 
-        // TODO: validate that it is actually a url, check against precontained list of usable websites stored in a seperate file
+        // TODO: validate that it is actually a url, check against precontained list of usable websites stored in a seperate file, async -> return value
 
         return try {
             URI(url.value).toURL()

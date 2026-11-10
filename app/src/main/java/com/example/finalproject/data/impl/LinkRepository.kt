@@ -18,12 +18,12 @@ class LinkRepository : ILinkRepository {
         return _links
     }
 
-    override suspend fun deleteLink(link: Link) { // TODO: add a list / stack for "undo delete" button, clears upon app restarting
+    override suspend fun deleteLink(link: Link) { // TODO: add a list / stack for "undo delete" button, clears upon app restarting -> stored in cache
         delay(500.milliseconds)
         _links = _links.filter { s -> s.id != link.id }
     }
 
-    override fun addLink(link: Link) {
+    override fun addLink(link: Link) { // TODO. adds to database, will need to be suspend
         _links = listOf(link) + _links
     }
 }

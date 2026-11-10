@@ -77,7 +77,7 @@ fun LinkBox (
                 Text(
                     text = "[~~]",
                     modifier = Modifier.weight(0.3f)
-                ) // TODO: can import symbols for various preloaded websites -> SQL
+                ) // TODO: can import symbols for various preloaded websites -> SQL, async -> return value, store one copy per app and reference per link
                 Text(
                     text = link.url,
                     maxLines = 1,

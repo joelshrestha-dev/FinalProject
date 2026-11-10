@@ -120,7 +120,7 @@ fun ConfirmDeletion(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class) // TODO: ADD IN TOGGLEABLE GROUPS FOR LINK HISTORY ON A PER APP BASIS
 @Composable
 fun LinkListUI (
     modifier: Modifier = Modifier,
@@ -177,7 +177,7 @@ fun Landscape ( // TODO: MOVE DELETE BUTTON TO THE SIDE CARD IN LANDSCAPE? OR A 
                     },
                 contentAlignment = Alignment.Center
             ) {
-                Text(selectedLink?.url ?: "") // TODO: potentially add embed details -> internet api
+                Text(selectedLink?.url ?: "") // TODO: potentially add embed details -> internet api + cache
             }
         }
         LinkListUI(
