@@ -23,6 +23,7 @@ interface LinksDao {
 }
 
 @Database(entities = [Link::class], version = 1, exportSchema = false)
+// for db reset -> adb shell pm clear com.example.finalproject
 abstract class LinksDatabase : RoomDatabase() {
     abstract fun linksDao(): LinksDao
 }

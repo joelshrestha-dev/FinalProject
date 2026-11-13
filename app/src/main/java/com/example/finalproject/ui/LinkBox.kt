@@ -45,7 +45,7 @@ fun LinkBox (
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    Log.d("TAG", link.id)
+    Log.d("TAG", link.id.toString())
 
     Card(
         shape = RoundedCornerShape(5.dp),
@@ -75,7 +75,7 @@ fun LinkBox (
                 horizontalArrangement = Absolute.SpaceBetween
             ) { //  icon?] \[link itself]
                 Text(
-                    text = "[~~]",
+                    text = "[~~]" + link.id,
                     modifier = Modifier.weight(0.3f)
                 ) // TODO: can import symbols for various preloaded websites -> SQL, async -> return value, store one copy per app and reference per link
                 Text(

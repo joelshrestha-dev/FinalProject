@@ -33,6 +33,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// for crash log report -> adb logcat -b all -v threadtime -T 1 AndroidRuntime:E '*:S'
+
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Preview(showBackground = true)
 @Composable

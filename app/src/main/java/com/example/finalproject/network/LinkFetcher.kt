@@ -42,8 +42,8 @@ class LinkFetcher: ILinkFetcher {
     override suspend fun fetchLinks(): List<Link> {
         // return withContext(Dispatchers.IO) { _linkApi.getLinks() } TODO - MAKE THE API
         return listOf(
-            Link(id = "1", url = "https://developer.android.com"),
-            Link(id = "2", url = "https://kotlinlang.org")
+            Link(id = 1, url = "https://developer.android.com"),
+            Link(id = 2, url = "https://kotlinlang.org")
         )
     }
 

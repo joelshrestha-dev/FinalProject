@@ -11,8 +11,8 @@ class LinkRepository : ILinkRepository {
     private var _links = listOf<Link>()
 
     init {
-        _links =(0..20).map { i ->
-            Link("Link $i", "https://www.google.com/$i")
+        _links =(0L..20L).map { i ->
+            Link(i, "https://www.google.com/$i")
         }
     }
 
@@ -24,7 +24,9 @@ class LinkRepository : ILinkRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun deleteLink(link: Link) { // TODO: add a list / stack for "undo delete" button, clears upon app restarting -> stored in cache
+    // TODO: add a list / stack for "undo delete" button, clears upon app restarting -> stored in cache
+    // TODO: make delete method change the id of the link
+    override suspend fun deleteLink(link: Link) {
         delay(500.milliseconds)
         _links = _links.filter { s -> s.id != link.id }
     }

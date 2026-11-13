@@ -25,7 +25,7 @@ class NewLinkViewModel : ViewModel() {
 
         return try {
             URI(url.value).toURL()
-            Link("",url.value)
+            Link(0,url.value)
         } catch (e: Exception) {
             Toast.makeText(
                 null,
