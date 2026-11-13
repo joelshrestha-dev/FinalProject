@@ -114,7 +114,7 @@ fun LinkBox (
                     null,
                     modifier = Modifier.clickable {
                         scope.launch {
-                            clipboard.setClipEntry((ClipData.newPlainText("label", link.url.toString()).toClipEntry()))
+                            clipboard.setClipEntry((ClipData.newPlainText("label", link.url).toClipEntry()))
                         }
                     }
                 )

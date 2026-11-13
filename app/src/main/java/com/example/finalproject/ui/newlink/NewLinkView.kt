@@ -103,7 +103,7 @@ fun NewLinkView (
                         clipboard.setClipEntry(
                             ClipData.newPlainText(
                                 "label",
-                                link.url.toString()
+                                link.url
                             ).toClipEntry()
                         )
                     }

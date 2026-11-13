@@ -189,20 +189,3 @@ fun Landscape ( // TODO: MOVE DELETE BUTTON TO THE SIDE CARD IN LANDSCAPE? OR A 
 
     }
 }
-
-@OptIn(ExperimentalFoundationApi::class)
-@Preview
-@Composable
-fun LinkListPreview () {
-    FinalProjectTheme() {
-        val vm = LinkListViewModel()
-        LinkListView(
-            modifier = Modifier,
-            links = vm.links.value,
-            selectedLink = null,
-            waiting = false,
-            onDelete = {},
-            onSelectLink = {}
-        )
-    }
-}
