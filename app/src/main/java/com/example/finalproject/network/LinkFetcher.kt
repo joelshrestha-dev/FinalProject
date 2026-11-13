@@ -23,7 +23,7 @@ interface LinkApi {
 
 
 class LinkFetcher: ILinkFetcher {
-    private val URL = "https://api.example.com" // private rest api
+    private val URL = "https://my-json-server.typicode.com/joelshrestha-dev/FinalProject/"
 
     private val _linkApi: LinkApi
 
