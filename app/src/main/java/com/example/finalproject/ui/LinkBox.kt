@@ -75,7 +75,7 @@ fun LinkBox (
                 horizontalArrangement = Absolute.SpaceBetween
             ) { //  icon?] \[link itself]
                 Text(
-                    text = "[~~]" + link.id,
+                    text = "[~~]",
                     modifier = Modifier.weight(0.3f)
                 ) // TODO: can import symbols for various preloaded websites -> SQL, async -> return value, store one copy per app and reference per link
                 Text(

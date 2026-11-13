@@ -12,7 +12,7 @@ class LinkRepository : ILinkRepository {
 
     init {
         _links =(0L..20L).map { i ->
-            Link(i, "https://www.google.com/$i")
+            Link(url = "https://www.google.com/$i")
         }
     }
 

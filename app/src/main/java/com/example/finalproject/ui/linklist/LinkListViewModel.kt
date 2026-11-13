@@ -34,7 +34,7 @@ class LinkListViewModel(app: Application) : AndroidViewModel(app) {
 
     init {
         viewModelScope.launch {
-            var linksFromApi = _linkFetcher.fetchLinks()
+            var linksFromApi = listOf<Link>()
             try {
                 linksFromApi = _linkFetcher.fetchLinks()
             } catch (e: Exception) {

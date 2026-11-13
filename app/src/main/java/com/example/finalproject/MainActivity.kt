@@ -34,7 +34,14 @@ class MainActivity : ComponentActivity() {
 }
 
 // for crash log report -> adb logcat -b all -v threadtime -T 1 AndroidRuntime:E '*:S'
-
+/*
+* neccesary to run before opening the program
+*
+* adb shell pm grant com.example.finalproject android.permission.INTERNET
+* adb shell pm grant com.example.finalproject android.permission.ACCESS_LOCAL_NETWORK
+*
+* npx json-server db.json --host 0.0.0.0 --port 3000
+* */
 @OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class)
 @Preview(showBackground = true)
 @Composable

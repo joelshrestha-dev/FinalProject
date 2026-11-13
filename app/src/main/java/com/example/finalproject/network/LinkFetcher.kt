@@ -23,7 +23,7 @@ interface LinkApi {
 
 
 class LinkFetcher: ILinkFetcher {
-    private val URL = "https://my-json-server.typicode.com/joelshrestha-dev/FinalProject" // private rest api
+    private val URL = "http://10.0.2.2:3000/"
 
     private val _linkApi: LinkApi
 
@@ -44,8 +44,9 @@ class LinkFetcher: ILinkFetcher {
             return withContext(Dispatchers.IO) { _linkApi.getLinks() } //TODO - MAKE THE API
         } catch (e: Exception) {
             return listOf(
-                Link(id = 1, url = "https://developer.android.com"),
-                Link(id = 2, url = "https://kotlinlang.org")
+                Link(url = "https://developer.android.com"),
+                Link(url = "https://kotlinlang.org"),
+                Link(url = " " + e.toString())
             )
         }
     }
