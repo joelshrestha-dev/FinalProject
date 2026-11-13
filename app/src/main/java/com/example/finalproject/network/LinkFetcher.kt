@@ -44,9 +44,7 @@ class LinkFetcher: ILinkFetcher {
             return withContext(Dispatchers.IO) { _linkApi.getLinks() } //TODO - MAKE THE API
         } catch (e: Exception) {
             return listOf(
-                Link(url = "https://developer.android.com"),
-                Link(url = "https://kotlinlang.org"),
-                Link(url = " " + e.toString())
+                Link(url = "Error:  " + e.toString())
             )
         }
     }
