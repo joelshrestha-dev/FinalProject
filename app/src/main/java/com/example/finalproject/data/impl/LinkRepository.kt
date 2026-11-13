@@ -25,7 +25,6 @@ class LinkRepository : ILinkRepository {
     }
 
     // TODO: add a list / stack for "undo delete" button, clears upon app restarting -> stored in cache
-    // TODO: make delete method change the id of the link
     override suspend fun deleteLink(link: Link) {
         delay(500.milliseconds)
         _links = _links.filter { s -> s.id != link.id }
