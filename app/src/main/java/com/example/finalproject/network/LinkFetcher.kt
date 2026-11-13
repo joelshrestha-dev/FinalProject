@@ -40,11 +40,14 @@ class LinkFetcher: ILinkFetcher {
     }
 
     override suspend fun fetchLinks(): List<Link> {
-        // return withContext(Dispatchers.IO) { _linkApi.getLinks() } TODO - MAKE THE API
-        return listOf(
-            Link(id = 1, url = "https://developer.android.com"),
-            Link(id = 2, url = "https://kotlinlang.org")
-        )
+        try{
+            return withContext(Dispatchers.IO) { _linkApi.getLinks() } //TODO - MAKE THE API
+        } catch (e: Exception) {
+            return listOf(
+                Link(id = 1, url = "https://developer.android.com"),
+                Link(id = 2, url = "https://kotlinlang.org")
+            )
+        }
     }
 
     override suspend fun fetchIcon(url: String): Bitmap? {
